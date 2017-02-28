@@ -19,7 +19,9 @@
             [cortex.suite.train :as suite-train]
             [cortex.loss :as loss]
             [think.gate.core :as gate]
-            [think.parallel.core :as parallel]))
+            [think.parallel.core :as parallel]
+            [cortex.util :as util]
+            ))
 
 ;;We have to setup the web server slightly different when running
 ;;from the repl; we enable live updates using figwheel and such.  When
@@ -171,7 +173,7 @@
                                                                    image-size
                                                                    image-size))]
     (mapv (fn [x y] [(first x) (let [r (vec y)
-                                    r-idx (loss/max-index r)]
+                                    r-idx (util/max-index r)]
                                 {:prob (get r r-idx) :class (get class-names r-idx)})])
           id-observation-pairs
           results)))
